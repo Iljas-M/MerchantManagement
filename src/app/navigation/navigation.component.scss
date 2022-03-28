@@ -1,0 +1,17 @@
+.navbar {
+    .container-fluid {
+
+        // Mobile.
+        .navbar-brand {
+            display: none;           
+        }
+
+        // Tablet/Desktop.
+        @media screen and (min-width: 304px) {
+            .navbar-brand {
+                display: block;
+                border-bottom: 1px solid grey;
+            }
+        }
+    }
+}

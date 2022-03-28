@@ -1,0 +1,13 @@
+[
+    {
+        "id": "1",
+        "PaymentProvider": "ADYEN",
+        "LegalEntityName": "PlanB. GmbH",
+        "CountryCode": "DE",
+        "Currency": "EUR",
+        "StorePaymentMethodMode": [
+            "masterCard",
+            "Visa"
+        ]
+    }
+]

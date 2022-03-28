@@ -1,0 +1,29 @@
+.footer-parent-container{
+    width: 100%;
+    height: 100%;
+
+    .footer-content{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        border-top: 0.1px solid white;
+        justify-content: space-around;
+        align-items: center;
+        text-align: center;
+
+        > div {
+            width: 100px;
+            margin-bottom: 0.5rem;
+            margin-top: 0.5rem;
+            
+            color: white;
+
+            // https://www.w3docs.com/snippets/css/how-to-change-the-color-of-png-image-using-css.html.
+            img{
+                filter: invert(100%);
+            }
+          }
+    }
+
+}

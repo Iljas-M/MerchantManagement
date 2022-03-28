@@ -1,0 +1,24 @@
+@use "/src/assets/styles/variables.scss" as variables;
+
+.home-parent-container{
+    width: 100%;
+    height: 100%;
+ 
+    .titel-container{    
+
+        .titel{
+            padding-left: 1rem;
+            margin-top: 2rem;
+            color: variables.$white;
+        }
+    }
+
+    p{
+        overflow-wrap: break-word;
+        color: white;
+    }
+
+    .content-container{
+
+    }
+}
