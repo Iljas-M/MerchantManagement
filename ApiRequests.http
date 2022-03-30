@@ -1,0 +1,17 @@
+### Create Merchant Account.
+POST http://localhost:7071/api/create/merchant
+Content-Type: application/json
+
+{
+    "paymentProvider": "ADYEN",
+    "legalEntityName": "PlanB. GmbH",
+    "countryCode": "DE",
+    "currency": "EUR",
+    "storePaymentMethodMode": [
+        "masterCard",
+        "Visa"
+    ]
+}
+
+### Get Merchant Accounts.
+GET http://localhost:7071/api/get/merchants

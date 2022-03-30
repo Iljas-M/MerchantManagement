@@ -7,7 +7,7 @@
         height: 100%;
         display: flex;
         flex-wrap: wrap;
-        border-top: 0.1px solid white;
+        border-top: 0.1px solid gray;
         justify-content: space-around;
         align-items: center;
         text-align: center;
@@ -17,11 +17,11 @@
             margin-bottom: 0.5rem;
             margin-top: 0.5rem;
             
-            color: white;
+            color: black;
 
             // https://www.w3docs.com/snippets/css/how-to-change-the-color-of-png-image-using-css.html.
             img{
-                filter: invert(100%);
+               // filter: invert(100%);
             }
           }
     }

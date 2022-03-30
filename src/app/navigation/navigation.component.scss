@@ -13,5 +13,10 @@
                 border-bottom: 1px solid grey;
             }
         }
+
+        // Define NavBar Link Hover.
+        a.nav-link:hover{
+            background-color: rgba(151, 148, 148, 0.123);
+        }
     }
 }

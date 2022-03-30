@@ -9,16 +9,17 @@
         .titel{
             padding-left: 1rem;
             margin-top: 2rem;
-            color: variables.$white;
+            color: black;
         }
     }
 
     p{
         overflow-wrap: break-word;
-        color: white;
+        color: black;
     }
 
     .content-container{
-
+       border-top: solid 1px gray;
+       padding: 1rem;
     }
 }
