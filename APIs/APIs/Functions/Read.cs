@@ -3,6 +3,7 @@
 // </copyright>
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -10,7 +11,6 @@ using System.Net.Http;
 using System.Text;
 
 using APIs.Model;
-using Microsoft.Azure.Storage.Blob;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
@@ -28,64 +28,68 @@ namespace APIs.Functions
     /// Gets the merchants.
     /// </summary>
     /// <param name="req">The req.</param>
-    /// <param name="container">The container.</param>
+    /// <param name="blobs">The Blobs.</param>
     /// <param name="log">The log.</param>
     /// <param name="context">The context.</param>
     /// <returns>The HttpResponseMessage.</returns>
     [FunctionName(nameof(GetMerchants))]
     public static HttpResponseMessage GetMerchants(
-            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "get/merchants")]
-            [Blob("merchants", FileAccess.Read, Connection = "AzureWebJobsStorage")] CloudBlobContainer container,
+            [HttpTrigger(AuthorizationLevel.Function, "get", Route = "get/merchants")] HttpRequestMessage req,
+            [Blob("merchants", FileAccess.Read, Connection = "AzureWebJobsStorage")] IEnumerable<string> blobs,
             ILogger log,
             ExecutionContext context)
     {
+      // Param Check.
+      if (req is null)
+      {
+        throw new ArgumentNullException(nameof(req));
+      }
+
+      if (blobs is null)
+      {
+        throw new ArgumentNullException(nameof(blobs));
+      }
+
+      if (log is null)
+      {
+        throw new ArgumentNullException(nameof(log));
+      }
+
+      if (context is null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
       // Init.
       string methodName = context.FunctionName;
-      HttpResponseMessage response = new HttpResponseMessage();
-      ResponseModel responseMessage = new ResponseModel();
-      JArray merchantAccounts = new JArray();
+      var blobsCount = blobs?.ToList().Count;
+
+      HttpResponseMessage response = new ();
+      ResponseModel responseMessage = new ();
+      JArray merchantAccounts = new ();
 
       try
       {
         log.LogInformation("---------------------------------------------------------------------------------------------");
-        log.LogInformation($"'{methodName}' - processed a request.");
-
-        // Get Blob Directory.
-        CloudBlobDirectory cloudBlobDirectory = container.GetDirectoryReference(string.Empty);
-
-        // Get Blob Segments from Blob Storage.
-        BlobResultSegment blobs = cloudBlobDirectory.ListBlobsSegmentedAsync(
-            useFlatBlobListing: false,
-            blobListingDetails: BlobListingDetails.None,
-            maxResults: null,
-            currentToken: null,
-            options: null,
-            operationContext: null)
-         .Result;
-
-        log.LogInformation($"'{methodName}' - started");
-        log.LogInformation($"'{methodName}' - '{blobs?.Results.ToList().Count}' - Merchants Are Found");
+        log.LogInformation($"'{methodName}' - Processed");
+        log.LogInformation($"'{methodName}' - '{blobsCount}' - Merchants Are Found");
 
         // Check if any blobs are found.
-        if (blobs != null){
-
+        if (blobs != null)
+        {
           // Go through all merchants.
-          foreach (var blob in blobs?.Results)
+          foreach (var blob in blobs)
           {
-            // Download Single Blob.
-            CloudBlockBlob cloudBlockBlob = blob as CloudBlockBlob;
-            var content = cloudBlockBlob.DownloadTextAsync().Result;
-
             // Append Merchant.
-            merchantAccounts.Add(JObject.Parse(content));
+            merchantAccounts.Add(JObject.Parse(blob));
 
-            log.LogInformation($"'{methodName}' - '{JObject.Parse(content)["id"]}' - was successfully merged.");
+            log.LogInformation($"'{methodName}' - '{JObject.Parse(blob)["id"]}' - Was Successfully Merged.");
           }
 
           // Set ResponseMessage.
           responseMessage.Status = (int)HttpStatusCode.OK;
           responseMessage.Message = "The merchant accounts were successfully fetched";
-          responseMessage.MerchantAccounts = merchantAccounts;
+          responseMessage.ExtensionData["MerchantAccounts"] = merchantAccounts;
         }
         else
         {
@@ -104,14 +108,14 @@ namespace APIs.Functions
         // Set Response.
         response.StatusCode = HttpStatusCode.BadRequest;
         responseMessage.Status = (int)HttpStatusCode.BadRequest;
-        responseMessage.Message = $"'{methodName}' - failed \r\n {ex.Message} \r\n {ex.StackTrace}";
+        responseMessage.Message = $"'{methodName}' - Failed \r\n {ex.Message} \r\n {ex.StackTrace}";
       }
       finally
       {
-        log.LogInformation($"'{methodName}' - finished");
+        log.LogInformation($"'{methodName}' - Finished");
       }
 
-      log.LogInformation($"'{methodName}' - MerchantAccounts: {responseMessage.MerchantAccounts}");
+      log.LogInformation($"'{methodName}' - MerchantAccounts: \r\n{responseMessage.ExtensionData["MerchantAccounts"]}");
 
       // Set the Response Content.
       response.Content = new StringContent(JsonConvert.SerializeObject(responseMessage), Encoding.UTF8, "application/json");

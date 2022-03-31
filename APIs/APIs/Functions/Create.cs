@@ -7,9 +7,12 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 using APIs.Model;
-using Microsoft.Azure.Storage.Blob;
+using Azure;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Extensions.Logging;
@@ -26,30 +29,53 @@ namespace APIs.Functions
     /// Creates the merchant.
     /// </summary>
     /// <param name="req">The req.</param>
-    /// <param name="container">The container.</param>
+    /// <param name="blobContainer">The blob container.</param>
     /// <param name="log">The log.</param>
     /// <param name="context">The context.</param>
     /// <returns>The HttpResponseMessage.</returns>
-    [FunctionName(nameof(CreateMerchant))]
-    public static HttpResponseMessage CreateMerchant(
+    [FunctionName(nameof(CreateMerchantAsync))]
+    public static async Task<HttpResponseMessage> CreateMerchantAsync(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "create/merchant")] HttpRequestMessage req,
-            [Blob("merchants", FileAccess.Write, Connection = "AzureWebJobsStorage")] CloudBlobContainer container,
+            [Blob("merchants", FileAccess.Write, Connection = "AzureWebJobsStorage")] BlobContainerClient blobContainer,
             ILogger log,
             ExecutionContext context)
     {
+      // Param Check.
+      if (req is null)
+      {
+        throw new ArgumentNullException(nameof(req));
+      }
+
+      if (blobContainer is null)
+      {
+        throw new ArgumentNullException(nameof(blobContainer));
+      }
+
+      if (log is null)
+      {
+        throw new ArgumentNullException(nameof(log));
+      }
+
+      if (context is null)
+      {
+        throw new ArgumentNullException(nameof(context));
+      }
+
       // Init.
       string methodName = context.FunctionName;
       string id = Guid.NewGuid().ToString();
-      HttpResponseMessage response = new HttpResponseMessage();
-      ResponseModel responseMessage = new ResponseModel();
+      HttpResponseMessage response = new ();
+      ResponseModel responseMessage = new ();
 
       try
       {
         log.LogInformation("---------------------------------------------------------------------------------------------");
-        log.LogInformation($"'{methodName}' - '{id}' - processed a request.");
+        log.LogInformation($"'{methodName}' - '{id}' - Processed");
 
         // Read Merchant from FrondEnd.
         MerchantAccountModel merchantAccount = req.Content?.ReadAsAsync<MerchantAccountModel>().Result;
+
+        log.LogInformation($"'{methodName}' - '{id}' - RequestBody: \n {JsonConvert.SerializeObject(merchantAccount)}");
 
         // Handle if Merchant is null.
         if (merchantAccount == null)
@@ -67,15 +93,31 @@ namespace APIs.Functions
         merchantAccount.Id = id;
 
         // If the Blob container doesn't already exist, create new one.
-        container.CreateIfNotExistsAsync().Wait();
+        Response blobContainerResult = blobContainer.CreateIfNotExistsAsync().Result?.GetRawResponse();
 
-        log.LogInformation($"'{methodName}' - '{id}' - store to Blob started");
+        // Log the Result of creating Blob Container.
+        if (blobContainerResult != null)
+        {
+          log.LogInformation($"'{methodName}' - '{id}' - Container was Successful {blobContainerResult?.ReasonPhrase} - '{blobContainerResult?.Status}'");
+        }
 
         // Upload Merchant to Blob.
-        CloudBlockBlob blob = container.GetBlockBlobReference(merchantAccount.Id);
-        blob.UploadTextAsync(JsonConvert.SerializeObject(merchantAccount)).Wait();
+        using (MemoryStream memoryStream = new ())
+        {
+          // Get Blob Client.
+          BlobClient blobClient = blobContainer.GetBlobClient(merchantAccount.Id);
 
-        log.LogInformation($"'{methodName}' - '{id}' - store to Blob successful");
+          // Read Merchant as Bytes and then Write as Stream.
+          await memoryStream.WriteAsync(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(merchantAccount)));
+          memoryStream.Position = 0;
+
+          // Upload.
+          Response containerResult = blobClient.UploadAsync(memoryStream, new BlobHttpHeaders { ContentType = "application/json" }).Result?.GetRawResponse();
+
+          log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful {containerResult?.ReasonPhrase} - '{containerResult?.Status}'");
+        }
+
+        log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful Stored");
 
         // Create ResponseMessage.
         response.StatusCode = HttpStatusCode.Created;
@@ -91,14 +133,14 @@ namespace APIs.Functions
         // Set Response.
         response.StatusCode = HttpStatusCode.BadRequest;
         responseMessage.Status = (int)HttpStatusCode.BadRequest;
-        responseMessage.Message = $"'{methodName}' - '{id}' - failed \r\n {ex.Message} \r\n {ex.StackTrace}";
+        responseMessage.Message = $"'{methodName}' - '{id}' - Failed \r\n {ex.Message} \r\n {ex.StackTrace}";
       }
       finally
       {
-        log.LogInformation($"'{methodName}' - '{id}' - finished");
+        log.LogInformation($"'{methodName}' - '{id}' - Finished");
       }
 
-      log.LogInformation($"'{methodName}' - '{id}' - responseMessage: {JsonConvert.SerializeObject(responseMessage)}");
+      log.LogInformation($"'{methodName}' - '{id}' - ResponseBody: \n {JsonConvert.SerializeObject(responseMessage)}");
 
       // Set the Response Content.
       response.Content = new StringContent(JsonConvert.SerializeObject(responseMessage), Encoding.UTF8, "application/json");

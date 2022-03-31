@@ -2,7 +2,9 @@
 // Copyright (c) PlanB. GmbH. All rights reserved.
 // </copyright>
 
-using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+
+using Newtonsoft.Json;
 
 namespace APIs.Model
 {
@@ -11,6 +13,15 @@ namespace APIs.Model
   /// </summary>
   public class ResponseModel
   {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ResponseModel"/> class.
+    /// The ResponseModel.
+    /// </summary>
+    public ResponseModel()
+    {
+      this.ExtensionData = new Dictionary<string, object>();
+    }
+
     /// <summary>
     /// Gets or sets the status.
     /// </summary>
@@ -28,11 +39,10 @@ namespace APIs.Model
     public string Message { get; set; }
 
     /// <summary>
-    /// Gets or sets the body.
+    /// Gets or sets the extension data.
     /// </summary>
-    /// <value>
-    /// The body.
-    /// </value>
-    public JArray MerchantAccounts { get; set; }
+    /// <value>The extension data.</value>
+    [JsonExtensionData]
+    public Dictionary<string, object> ExtensionData { get; set; }
   }
 }

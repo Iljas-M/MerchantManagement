@@ -9,12 +9,12 @@
             Create Merchant Account.
             </summary>
         </member>
-        <member name="M:APIs.Functions.Create.CreateMerchant(System.Net.Http.HttpRequestMessage,Microsoft.Azure.Storage.Blob.CloudBlobContainer,Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
+        <member name="M:APIs.Functions.Create.CreateMerchantAsync(System.Net.Http.HttpRequestMessage,Azure.Storage.Blobs.BlobContainerClient,Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
             <summary>
             Creates the merchant.
             </summary>
             <param name="req">The req.</param>
-            <param name="container">The container.</param>
+            <param name="blobContainer">The blob container.</param>
             <param name="log">The log.</param>
             <param name="context">The context.</param>
             <returns>The HttpResponseMessage.</returns>
@@ -24,14 +24,29 @@
             Get Merchant Accounts.
             </summary>
         </member>
-        <member name="M:APIs.Functions.Read.GetMerchants(Microsoft.Azure.Storage.Blob.CloudBlobContainer,Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
+        <member name="M:APIs.Functions.Read.GetMerchants(System.Net.Http.HttpRequestMessage,System.Collections.Generic.IEnumerable{System.String},Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
             <summary>
             Gets the merchants.
             </summary>
             <param name="req">The req.</param>
-            <param name="container">The container.</param>
+            <param name="blobs">The Blobs.</param>
             <param name="log">The log.</param>
             <param name="context">The context.</param>
+            <returns>The HttpResponseMessage.</returns>
+        </member>
+        <member name="T:APIs.Functions.Update">
+            <summary>
+            Update Merchant Account via Id.
+            </summary>
+        </member>
+        <member name="M:APIs.Functions.Update.UpdateMerchantAsync(System.Net.Http.HttpRequestMessage,Azure.Storage.Blobs.BlobClient,System.String,Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
+            <summary>
+            Update Merchant Account.
+            </summary>
+            <param name="req"></param>
+            <param name="blobContainer"></param>
+            <param name="id"></param>
+            <param name="log"></param>
             <returns>The HttpResponseMessage.</returns>
         </member>
         <member name="T:APIs.Model.MerchantAccountModel">
@@ -92,6 +107,12 @@
             The Response Model.
             </summary>
         </member>
+        <member name="M:APIs.Model.ResponseModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:APIs.Model.ResponseModel"/> class.
+            The ResponseModel.
+            </summary>
+        </member>
         <member name="P:APIs.Model.ResponseModel.Status">
             <summary>
             Gets or sets the status.
@@ -108,13 +129,11 @@
             The message.
             </value>
         </member>
-        <member name="P:APIs.Model.ResponseModel.MerchantAccounts">
+        <member name="P:APIs.Model.ResponseModel.ExtensionData">
             <summary>
-            Gets or sets the body.
+            Gets or sets the extension data.
             </summary>
-            <value>
-            The body.
-            </value>
+            <value>The extension data.</value>
         </member>
     </members>
 </doc>
