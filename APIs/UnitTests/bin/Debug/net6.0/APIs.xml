@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>APIs</name>
+    </assembly>
+    <members>
+        <member name="T:APIs.Functions.Create">
+            <summary>
+            Create Merchant Account.
+            </summary>
+        </member>
+        <member name="M:APIs.Functions.Create.CreateMerchantAsync(System.Net.Http.HttpRequestMessage,Azure.Storage.Blobs.BlobContainerClient,Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
+            <summary>
+            Creates the merchant.
+            </summary>
+            <param name="req">The req.</param>
+            <param name="blobContainer">The blob container.</param>
+            <param name="log">The log.</param>
+            <param name="context">The context.</param>
+            <returns>The HttpResponseMessage.</returns>
+        </member>
+        <member name="T:APIs.Functions.Read">
+            <summary>
+            Get Merchant Accounts.
+            </summary>
+        </member>
+        <member name="M:APIs.Functions.Read.GetMerchants(System.Net.Http.HttpRequestMessage,System.Collections.Generic.IEnumerable{System.String},Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
+            <summary>
+            Gets the merchants.
+            </summary>
+            <param name="req">The req.</param>
+            <param name="blobs">The Blobs.</param>
+            <param name="log">The log.</param>
+            <param name="context">The context.</param>
+            <returns>The HttpResponseMessage.</returns>
+        </member>
+        <member name="T:APIs.Functions.Update">
+            <summary>
+            Update Merchant Account via Id.
+            </summary>
+        </member>
+        <member name="M:APIs.Functions.Update.UpdateMerchantAsync(System.Net.Http.HttpRequestMessage,Azure.Storage.Blobs.BlobClient,System.String,Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
+            <summary>
+            Update Merchant Account.
+            </summary>
+            <param name="req"></param>
+            <param name="blobContainer"></param>
+            <param name="id"></param>
+            <param name="log"></param>
+            <returns>The HttpResponseMessage.</returns>
+        </member>
+        <member name="T:APIs.Model.MerchantAccountModel">
+            <summary>
+            The Merchant Account Model.
+            </summary>
+        </member>
+        <member name="P:APIs.Model.MerchantAccountModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:APIs.Model.MerchantAccountModel.PaymentProvider">
+            <summary>
+            Gets or sets the payment provider.
+            </summary>
+            <value>
+            The payment provider.
+            </value>
+        </member>
+        <member name="P:APIs.Model.MerchantAccountModel.LegalEntityName">
+            <summary>
+            Gets or sets the name of the legal entity.
+            </summary>
+            <value>
+            The name of the legal entity.
+            </value>
+        </member>
+        <member name="P:APIs.Model.MerchantAccountModel.CountryCode">
+            <summary>
+            Gets or sets the country code.
+            </summary>
+            <value>
+            The country code.
+            </value>
+        </member>
+        <member name="P:APIs.Model.MerchantAccountModel.Currency">
+            <summary>
+            Gets or sets the currency.
+            </summary>
+            <value>
+            The currency.
+            </value>
+        </member>
+        <member name="P:APIs.Model.MerchantAccountModel.StorePaymentMethodMode">
+            <summary>
+            Gets or sets the currency.
+            </summary>
+            <value>
+            The currency.
+            </value>
+        </member>
+        <member name="T:APIs.Model.ResponseModel">
+            <summary>
+            The Response Model.
+            </summary>
+        </member>
+        <member name="M:APIs.Model.ResponseModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:APIs.Model.ResponseModel"/> class.
+            The ResponseModel.
+            </summary>
+        </member>
+        <member name="P:APIs.Model.ResponseModel.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="P:APIs.Model.ResponseModel.Message">
+            <summary>
+            Gets or sets the message.
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="P:APIs.Model.ResponseModel.ExtensionData">
+            <summary>
+            Gets or sets the extension data.
+            </summary>
+            <value>The extension data.</value>
+        </member>
+    </members>
+</doc>
