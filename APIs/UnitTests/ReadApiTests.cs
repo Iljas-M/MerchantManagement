@@ -64,8 +64,6 @@ namespace Functions.UnitTests
 
       this.blob.Setup(n => n.UploadTextAsync(It.IsAny<string>())).Returns(Task.FromResult(merchant));
 
-
-
       // Create new Blob.
       this.blob.Setup(n => n.UploadTextAsync(merchant));
 
