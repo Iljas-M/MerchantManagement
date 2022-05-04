@@ -1,4 +1,4 @@
-<div class="merchants-parent-container">
+<div class="merchants-parent-container table-responsive">
 
     <div class="merchants-content-container">
 
@@ -6,37 +6,28 @@
             <h1> Merchant Accounts Management</h1>
         </div>
 
-        <div class="merchants-items">
-            <table class="table table-light table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
-    </div>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"><p>Nr</p></th>
+              <th scope="col"><p>Account Code</p></th>
+              <th scope="col"><p>Account Status</p></th>
+              <th scope="col" class="text-end">
+                  <button type="button" class="col btn btn-success" routerLink="account"><a>Create</a></button>
+              </th>
+            </tr>
+          </thead>
+          <p>{{merchantAccounts$ | async | json}}</p>
+          <tbody>
+            <tr *ngFor="let item of (merchantAccounts$ | async); let i = index">
+              <th scope="row"><p>{{ i + 1 }}</p></th>
+              <td><p>{{ item.MerchantAccount.id }}</p></td>
+              <td><p>{{ item.MerchantAccount.legalEntityName }}</p></td>
+              <td class="text-end">
+                  <button type="button" class="btn btn-primary" ><a>Edit</a></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
 </div>
