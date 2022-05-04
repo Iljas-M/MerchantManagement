@@ -113,7 +113,7 @@ namespace APIs.Functions
           memoryStream.Position = 0;
 
           // Upload.
-          Response containerResult = blobClient.UploadAsync(memoryStream, new BlobHttpHeaders { ContentType = "application/json" }).Result?.GetRawResponse();
+          Response containerResult = blobClient?.UploadAsync(memoryStream, new BlobHttpHeaders { ContentType = "application/json" }).Result?.GetRawResponse();
 
           log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful {containerResult?.ReasonPhrase} - '{containerResult?.Status}'");
         }

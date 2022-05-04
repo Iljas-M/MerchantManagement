@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Text;
 using APIs.Model;
+using Azure.Storage.Blobs;
 
 namespace UnitTests
 {
@@ -22,7 +23,7 @@ namespace UnitTests
     /// The correlation identifier.
     /// </summary>
     private string id;
-
+    
     /// <summary>
     /// The context.
     /// </summary>
@@ -34,14 +35,9 @@ namespace UnitTests
     private ILogger log;
 
     /// <summary>
-    /// The coudBlobContainer.
-    /// </summary>
-    private Mock<CloudBlobContainer> container;
-
-    /// <summary>
     /// The CloudBlockBlob.
     /// </summary>
-    private Mock<CloudBlockBlob> blob;
+    private Mock<BlobContainerClient> blobContainerClient;
 
     /// <summary>
     /// The httpRequestMessage.
@@ -60,20 +56,17 @@ namespace UnitTests
       this.log = Mock.Of<ILogger>();
       this.request = new HttpRequestMessage();
 
-      // Create Mock for Blob and Container.
-      this.container = new Mock<CloudBlobContainer>(new Uri("http://localhost/container"));
-      this.blob = new Mock<CloudBlockBlob>(new Uri("http://localhost/blob"));
+      // Create Mock for BlobClient.
+      this.blobContainerClient = new Mock<BlobContainerClient>();
 
-      // Setup Mock and Container.
-      this.blob.Setup(n => n.UploadTextAsync(It.IsAny<string>())).Returns(Task.FromResult(true));
-      this.container.Setup(n => n.GetBlockBlobReference(It.IsAny<string>())).Returns(this.blob.Object);
+      // Setup BlobClient Mock.
+      this.blobContainerClient.Setup(i => i.AccountName).Returns("merchants");
     }
 
     /// <summary>
     /// Create Merchant OK Test.
     /// </summary>
     [TestMethod]
-    [Ignore]
     public void CreateMerchantOkTest()
     {
       // Set Merchant Sample Data.
@@ -91,13 +84,14 @@ namespace UnitTests
       };
 
       // Run the Create Function.
-      // HttpResponseMessage result = APIs.Functions.Create.CreateMerchant(this.request, this.container.Object, this.log, this.context);
+      HttpResponseMessage result = APIs.Functions.Create.CreateMerchantAsync(this.request, this.blobContainerClient.Object, this.log, this.context).Result;
 
       // Get the content from result.
-     //  ResponseModel content = result.Content.ReadAsAsync<ResponseModel>().Result;
+      ResponseModel content = result.Content.ReadAsAsync<ResponseModel>().Result;
 
       // Check Response.
-
+      Assert.IsNotNull(result);
+      Assert.AreEqual((int)result.StatusCode, content.Status);
     }
 
     /// <summary>

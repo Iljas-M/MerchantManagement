@@ -21,7 +21,7 @@ namespace APIs.Functions
     {
 
     /// <summary>
-    /// Update Merchant Account.
+    /// Delete Merchant Account.
     /// </summary>
     /// <param name="req"></param>
     /// <param name="blobClient"></param>
@@ -29,7 +29,7 @@ namespace APIs.Functions
     /// <param name="log"></param>
     /// <returns>The HttpResponseMessage.</returns>
     [FunctionName(nameof(DeleteMerchant))]
-    public static async Task<HttpResponseMessage> DeleteMerchant(
+    public static HttpResponseMessage DeleteMerchant(
             [HttpTrigger(AuthorizationLevel.Function, "delete", Route = "delete/merchant/{id}")] HttpRequestMessage req,
             [Blob("merchants/{id}", FileAccess.Write, Connection = "AzureWebJobsStorage")] BlobClient blobClient,
             string id,

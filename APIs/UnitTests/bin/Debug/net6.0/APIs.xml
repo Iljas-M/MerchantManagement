@@ -19,6 +19,21 @@
             <param name="context">The context.</param>
             <returns>The HttpResponseMessage.</returns>
         </member>
+        <member name="T:APIs.Functions.Delete">
+            <summary>
+            Delete Merchant Account.
+            </summary>
+        </member>
+        <member name="M:APIs.Functions.Delete.DeleteMerchant(System.Net.Http.HttpRequestMessage,Azure.Storage.Blobs.BlobClient,System.String,Microsoft.Extensions.Logging.ILogger,Microsoft.Azure.WebJobs.ExecutionContext)">
+            <summary>
+            Delete Merchant Account.
+            </summary>
+            <param name="req"></param>
+            <param name="blobClient"></param>
+            <param name="id"></param>
+            <param name="log"></param>
+            <returns>The HttpResponseMessage.</returns>
+        </member>
         <member name="T:APIs.Functions.Read">
             <summary>
             Get Merchant Accounts.
