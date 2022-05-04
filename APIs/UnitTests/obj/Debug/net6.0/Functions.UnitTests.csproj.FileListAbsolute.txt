@@ -173,3 +173,9 @@ C:\Users\IljasgadzhiM\Downloads\Test\MerchantManagement\APIs\UnitTests\obj\Debug
 C:\Users\IljasgadzhiM\Downloads\Test\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\Functions.UnitTests.pdb
 C:\Users\IljasgadzhiM\Downloads\Test\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\Functions.UnitTests.genruntimeconfig.cache
 C:\Users\IljasgadzhiM\Downloads\Test\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\ref\Functions.UnitTests.dll
+C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\Functions.UnitTests.csproj.AssemblyReference.cache
+C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\Functions.UnitTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\Functions.UnitTests.csproj.CoreCompileInputs.cache
+C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\Functions.UnitTests.dll
+C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\refint\Functions.UnitTests.dll
+C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\UnitTests\obj\Debug\net6.0\Functions.UnitTests.pdb

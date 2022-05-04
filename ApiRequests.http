@@ -31,3 +31,9 @@ Content-Type: application/json
         "Visa"
     ]
 }
+
+
+### Delete Merchant Account.
+
+DELETE http://localhost:7071/api/delete/merchant/20e50d61-5762-48ca-869b-257eea5947ba
+Content-Type: application/json
