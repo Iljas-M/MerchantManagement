@@ -6,7 +6,7 @@
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>C:\Users\49157\Desktop\ProjektArbeit\MerchantManagement\APIs\APIs\APIs.xml</DocumentationFile>
+    <DocumentationFile>C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\APIs\APIs.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>C:\Users\IljasgadzhiM\Desktop\ProjektArbeit\MerchantManagement\APIs\APIs\APIs.xml</DocumentationFile>
