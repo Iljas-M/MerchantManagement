@@ -7,10 +7,9 @@ Content-Type: application/json
     "legalEntityName": "PlanB. GmbH",
     "countryCode": "DE",
     "currency": "EUR",
-    "storePaymentMethodMode": [
-        "masterCard",
-        "Visa"
-        ]
+    "senderId": "1234",
+    "paymentProvider": "Adyen",
+    "country": "Deutschland"
 }
 
 ### Get Merchant Accounts.

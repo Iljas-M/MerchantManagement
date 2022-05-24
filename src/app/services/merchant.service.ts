@@ -32,13 +32,14 @@ export class MerchantService {
   }
 
   // Create Merchant.
-  createMerchant(merchant: Object): Observable<MerchantAccount> {
-    return this.http.post<MerchantAccount>(`${this.apiHostPath}/create/merchant`, merchant, { headers: this.headers });
+  createMerchant(merchant: Merchant): Observable<Merchant> {
+    console.log(merchant);
+    return this.http.post<Merchant>(`${this.apiHostPath}/create/merchant`, merchant, { headers: this.headers });
   }
 
   // Update Merchant.
-  updateMerchant(id: string, merchant: Object): Observable<MerchantAccount> {
-    return this.http.put<MerchantAccount>(`${this.apiHostPath}/update/merchant/${id}`, merchant, { headers: this.headers });
+  updateMerchant(id: string, merchant: Merchant): Observable<Merchant> {
+    return this.http.put<Merchant>(`${this.apiHostPath}/update/merchant/${id}`, merchant, { headers: this.headers });
   }
 
   // Delete Merchant by Id.

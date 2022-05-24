@@ -10,7 +10,9 @@ export interface Merchant {
     legalEntityName: string | null,
     countryCode: string | null,
     currency: string | null,
-    storePaymentMethodMode: [] | null
+    storePaymentMethodMode: [] | null,
+    senderId: string | null,
+    country: string | null,
 }
 
 export function createDefaultMerchantAccount(): Merchant {
@@ -21,6 +23,8 @@ export function createDefaultMerchantAccount(): Merchant {
         countryCode: "-1",
         currency: "-1",
         storePaymentMethodMode: [],
+        senderId: "-1",
+        country: "-1"
     }
 }
 
@@ -32,5 +36,7 @@ export function createNullMerchantAccount(): Merchant {
         countryCode: null,
         currency: null,
         storePaymentMethodMode: [],
+        senderId: null,
+        country: null
     }
 }

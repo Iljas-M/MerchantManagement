@@ -59,6 +59,24 @@ namespace APIs.Model
     public string Currency { get; set; }
 
     /// <summary>
+    /// Gets or sets the country.
+    /// </summary>
+    /// <value>
+    /// The country.
+    /// </value>
+    [JsonProperty(propertyName: "country", Required = Required.Default)]
+    public string Country { get; set; }
+
+    /// <summary>
+    /// Gets or sets the currency.
+    /// </summary>
+    /// <value>
+    /// The currency.
+    /// </value>
+    [JsonProperty(propertyName: "senderId", Required = Required.Default)]
+    public string SenderId { get; set; }
+
+    /// <summary>
     /// Gets or sets the currency.
     /// </summary>
     /// <value>

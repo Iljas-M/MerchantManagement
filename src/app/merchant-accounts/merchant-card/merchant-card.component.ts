@@ -33,7 +33,6 @@ export class MerchantCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     // Get from Route the Id.
     this.id = this.router.snapshot.paramMap.get('id');
 
@@ -55,16 +54,14 @@ export class MerchantCardComponent implements OnInit {
 
     // Create React Form.
     this.merchantAccountForm = this.formBuilder.group({
-      id: [this.merchantAccount.id,
-      [
-        Validators.required, Validators.pattern("^[0-9]{4}-[0-9]{4}-[A-Z]{2}-[0-9]{2}-[0-9]{2}$")
-      ]
-      ],
-      relatedContract: [this.merchantAccount.paymentProvider, [ Validators.required ]],
-      senderId: [this.merchantAccount.legalEntityName, [
+      id: [this.merchantAccount.id],
+      legalEntityName: [this.merchantAccount.legalEntityName],
+      paymentProvider: [this.merchantAccount.paymentProvider, [ Validators.required ]],
+      senderId: [this.merchantAccount.senderId, [
         Validators.required,
         Validators.minLength(1)
-      ]],    
+      ]],
+      country: [this.merchantAccount.country],    
       countryCode: [this.merchantAccount.countryCode,
       [
         Validators.required,
@@ -81,17 +78,25 @@ export class MerchantCardComponent implements OnInit {
 
   }
 
-
   inputChanged(key: string) {
     // Handle when the field is valid or invalid.
     this.isInvalid[key] = this.merchantAccountForm.controls[key].valid ? "is-valid" : "is-invalid";
   }
 
   // Create Merchant.
-  createUpdateButton(click: MouseEvent) {
+  createButton(click: MouseEvent) {
     click.preventDefault();
 
-    const observable = this.MerchantAccountsApiService.createMerchant({ MerchantAccount: this.merchantAccount });
+    const observable = this.MerchantAccountsApiService.createMerchant( this.merchantAccountForm.value );
+    const subscription = observable.subscribe();
+    this.subscriptions.push(subscription);
+  }
+
+  // Create Merchant.
+  updateButton(click: MouseEvent) {
+    click.preventDefault();
+
+    const observable = this.MerchantAccountsApiService.updateMerchant( this.id!, this.merchantAccountForm.value);
     const subscription = observable.subscribe();
     this.subscriptions.push(subscription);
   }

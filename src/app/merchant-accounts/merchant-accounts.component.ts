@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { filter, finalize, map, Observable, tap } from 'rxjs';
-import { createDefaultMerchantAccount, Merchant, MerchantAccount } from '../interfaces/merchant-account';
+import { map, Observable } from 'rxjs';
+import { Merchant } from '../interfaces/merchant-account';
 import { MerchantService } from '../services/merchant.service';
 
 @Component({
@@ -15,9 +15,7 @@ export class MerchantAccountsComponent implements OnInit, AfterViewInit {
 
   constructor(private MerchantAccountsApiService: MerchantService) { }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     // Get the MerchantsAccounts.

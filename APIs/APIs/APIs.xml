@@ -111,6 +111,22 @@
             The currency.
             </value>
         </member>
+        <member name="P:APIs.Model.MerchantAccountModel.Country">
+            <summary>
+            Gets or sets the country.
+            </summary>
+            <value>
+            The country.
+            </value>
+        </member>
+        <member name="P:APIs.Model.MerchantAccountModel.SenderId">
+            <summary>
+            Gets or sets the currency.
+            </summary>
+            <value>
+            The currency.
+            </value>
+        </member>
         <member name="P:APIs.Model.MerchantAccountModel.StorePaymentMethodMode">
             <summary>
             Gets or sets the currency.
