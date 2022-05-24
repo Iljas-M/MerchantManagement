@@ -1,5 +1,7 @@
 export interface MerchantAccount {
-    MerchantAccount: Merchant
+    MerchantAccounts: Merchant[],
+    Status: string,
+    Message: string
 }
 
 export interface Merchant {

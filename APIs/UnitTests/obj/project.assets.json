@@ -7335,20 +7335,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\49157\\.nuget\\packages\\": {}
+    "C:\\Users\\IljasgadzhiM\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\49157\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\UnitTests\\Functions.UnitTests.csproj",
+      "projectUniqueName": "C:\\Users\\IljasgadzhiM\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\UnitTests\\Functions.UnitTests.csproj",
       "projectName": "Functions.UnitTests",
-      "projectPath": "C:\\Users\\49157\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\UnitTests\\Functions.UnitTests.csproj",
-      "packagesPath": "C:\\Users\\49157\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\49157\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\UnitTests\\obj\\",
+      "projectPath": "C:\\Users\\IljasgadzhiM\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\UnitTests\\Functions.UnitTests.csproj",
+      "packagesPath": "C:\\Users\\IljasgadzhiM\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\IljasgadzhiM\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\UnitTests\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\49157\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\IljasgadzhiM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -7361,8 +7369,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\49157\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\APIs\\APIs.csproj": {
-              "projectPath": "C:\\Users\\49157\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\APIs\\APIs.csproj"
+            "C:\\Users\\IljasgadzhiM\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\APIs\\APIs.csproj": {
+              "projectPath": "C:\\Users\\IljasgadzhiM\\Desktop\\ProjektArbeit\\MerchantManagement\\APIs\\APIs\\APIs.csproj"
             }
           }
         }
@@ -7425,7 +7433,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -27,22 +27,22 @@ export class MerchantService {
   }
 
   // Get all Merchant Accounts.
-  getMerchantAccounts(): Observable<MerchantAccount[]> {
-    return this.http.get<MerchantAccount[]>(`${this.apiHostPath}/get/merchants`, { headers: this.headers });
+  getMerchantAccounts(): Observable<MerchantAccount> {
+    return this.http.get<MerchantAccount>(`${this.apiHostPath}/get/merchants`, { headers: this.headers });
   }
 
-  // Create and Update Merchant.
-  createUpdateMerchant(merchant: Object): Observable<MerchantAccount> {
-    return this.http.put<MerchantAccount>(`${this.apiHostPath}/create/merchant`, merchant, { headers: this.headers });
+  // Create Merchant.
+  createMerchant(merchant: Object): Observable<MerchantAccount> {
+    return this.http.post<MerchantAccount>(`${this.apiHostPath}/create/merchant`, merchant, { headers: this.headers });
+  }
+
+  // Update Merchant.
+  updateMerchant(id: string, merchant: Object): Observable<MerchantAccount> {
+    return this.http.put<MerchantAccount>(`${this.apiHostPath}/update/merchant/${id}`, merchant, { headers: this.headers });
   }
 
   // Delete Merchant by Id.
   deleteMerchant(id: string) {
     return this.http.delete(`${this.apiHostPath}/delete/merchant/${id}`, { headers: this.headers });
-  }
-
-  getOpenApi(){
-    return this.http.get<any>('assets/mock/dphOpenApi.json');
-    return this.http.get<any>(`${this.apiHostPath}/private/api/management/portal/apis/zeiss-payment-hub-merchant-management/openapi`);
   }
 }

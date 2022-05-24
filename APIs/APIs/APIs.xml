@@ -28,10 +28,11 @@
             <summary>
             Delete Merchant Account.
             </summary>
-            <param name="req"></param>
-            <param name="blobClient"></param>
-            <param name="id"></param>
-            <param name="log"></param>
+            <param name="req">The req.</param>
+            <param name="blobClient">The blob client.</param>
+            <param name="id">The id.</param>
+            <param name="log">The log.</param>
+            <param name="context">The context.</param>
             <returns>The HttpResponseMessage.</returns>
         </member>
         <member name="T:APIs.Functions.Read">
@@ -58,10 +59,11 @@
             <summary>
             Update Merchant Account.
             </summary>
-            <param name="req"></param>
-            <param name="blobContainer"></param>
-            <param name="id"></param>
-            <param name="log"></param>
+            <param name="req">The req.</param>
+            <param name="blobClient">The blob client.</param>
+            <param name="id">The id.</param>
+            <param name="log">The log.</param>
+            <param name="context">The context.</param>
             <returns>The HttpResponseMessage.</returns>
         </member>
         <member name="T:APIs.Model.MerchantAccountModel">

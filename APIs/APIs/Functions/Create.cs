@@ -40,7 +40,6 @@ namespace APIs.Functions
             ILogger log,
             ExecutionContext context)
     {
-
       // Param Check.
       if (req is null)
       {

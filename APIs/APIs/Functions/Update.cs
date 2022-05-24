@@ -1,19 +1,22 @@
+// <copyright file="Update.cs" company="PlanB. GmbH">
+// Copyright (c) PlanB. GmbH. All rights reserved.
+// </copyright>
+
 using System;
 using System.IO;
+using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+
+using APIs.Model;
+using Azure;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System.Net.Http;
-using Azure.Storage.Blobs;
-using APIs.Model;
-using System.Text;
-using Azure.Storage.Blobs.Models;
-using Azure;
-using System.Net;
 
 namespace APIs.Functions
 {
@@ -25,10 +28,11 @@ namespace APIs.Functions
     /// <summary>
     /// Update Merchant Account.
     /// </summary>
-    /// <param name="req"></param>
-    /// <param name="blobContainer"></param>
-    /// <param name="id"></param>
-    /// <param name="log"></param>
+    /// <param name="req">The req.</param>
+    /// <param name="blobClient">The blob client.</param>
+    /// <param name="id">The id.</param>
+    /// <param name="log">The log.</param>
+    /// <param name="context">The context.</param>
     /// <returns>The HttpResponseMessage.</returns>
     [FunctionName(nameof(UpdateMerchantAsync))]
     public static async Task<HttpResponseMessage> UpdateMerchantAsync(
@@ -81,19 +85,34 @@ namespace APIs.Functions
           log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful {containerResult?.ReasonPhrase} - '{containerResult?.Status}'");
         }
 
-        log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful Stored");
+        log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful Updated");
+
+        // Create ResponseMessage.
+        response.StatusCode = HttpStatusCode.Accepted;
+        responseMessage.Status = (int)HttpStatusCode.Accepted;
+        responseMessage.Message = "Merchant Successfully Updated";
       }
       catch (Exception ex)
       {
+        // Handle Exception.
+        log.LogInformation($"Exception", ex.Message);
+        log.LogInformation($"Exception StackTrace", ex.StackTrace);
 
-        throw;
+        // Set Response.
+        response.StatusCode = HttpStatusCode.BadRequest;
+        responseMessage.Status = (int)HttpStatusCode.BadRequest;
+        responseMessage.Message = $"'{methodName}' - '{id}' - Failed \r\n {ex.Message} \r\n {ex.StackTrace}";
       }
       finally
       {
-
+        log.LogInformation($"'{methodName}' - '{id}' - Finished");
       }
 
-      return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+      // Set the Response Content.
+      response.Content = new StringContent(JsonConvert.SerializeObject(responseMessage), Encoding.UTF8, "application/json");
+
+      log.LogInformation("---------------------------------------------------------------------------------------------");
+      return response;
     }
   }
 }

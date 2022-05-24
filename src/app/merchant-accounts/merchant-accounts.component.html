@@ -1,0 +1,32 @@
+
+<div class="merchant-accounts-parent-container table-responsive">
+    
+  <div class="merchants-titel">
+    <h1> Merchant Accounts Management</h1>
+</div>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col"><p>Nr</p></th>
+            <th scope="col"><p>Merchant Id</p></th>
+            <th scope="col"><p></p></th>
+            <th scope="col" class="text-end">
+                <button type="button" class="col btn btn-success" routerLink="account"><a>Create</a></button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of (merchantAccounts$ | async); let i = index">
+            <th scope="row" class="normal-font"><p>{{ i + 1 }}</p></th>
+            <td><p>{{ item.id }}</p></td>
+            <td><p>{{ "" }}</p></td>
+            <td class="text-end">      
+                <button type="button" class="btn btn-primary" 
+                [routerLink]="['/merchants/', item.id]" (click)="editMerchant(item)"><a>Edit</a></button>        
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+</div>

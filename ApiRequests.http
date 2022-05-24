@@ -2,8 +2,7 @@
 POST http://localhost:7071/api/create/merchant
 Content-Type: application/json
 
-{
-    "MerchantAccount": {
+{   
     "paymentProvider": "ADYEN",
     "legalEntityName": "PlanB. GmbH",
     "countryCode": "DE",
@@ -12,7 +11,6 @@ Content-Type: application/json
         "masterCard",
         "Visa"
         ]
-    }
 }
 
 ### Get Merchant Accounts.
@@ -20,7 +18,7 @@ GET http://localhost:7071/api/get/merchants
 
 
 ### Update Merchant Account.
-PUT http://localhost:7071/api/update/merchant/c75dab7c-e9e4-449d-be24-23709b240502
+PUT http://localhost:7071/api/update/merchant/c56db5bb-eb07-4b72-8d18-0258bbcfc914
 Content-Type: application/json
 
 {
@@ -36,6 +34,5 @@ Content-Type: application/json
 
 
 ### Delete Merchant Account.
-
-DELETE http://localhost:7071/api/delete/merchant/20e50d61-5762-48ca-869b-257eea5947ba
+DELETE http://localhost:7071/api/delete/merchant/c56db5bb-eb07-4b72-8d18-0258bbcfc914
 Content-Type: application/json

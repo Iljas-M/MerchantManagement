@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
-import { MerchantsComponent } from './merchants/merchants.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MerchantAccountsComponent } from './merchant-accounts/merchant-accounts.component';
+import { MerchantCardComponent } from './merchant-accounts/merchant-card/merchant-card.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,15 @@ import { HttpClientModule } from '@angular/common/http';
     NavigationComponent,
     HomeComponent,
     FooterComponent,
-    MerchantsComponent
+    MerchantAccountsComponent,
+    MerchantCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

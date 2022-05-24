@@ -1,4 +1,0 @@
-Notizen für ProjektArbeit:
-
-- Icons von Boostrap
-- Components von Boostrap

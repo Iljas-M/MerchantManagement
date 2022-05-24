@@ -1,0 +1,159 @@
+<div *ngIf="merchantAccountByIdExist != undefined || merchantAccountIsActive != null"
+    class="merchant-card-parent-container">
+
+    <!-- 'Title' for Create And Update -->
+    <div class="row merchant-card-title">
+        <div class="col-12">
+            <ng-container *ngIf="merchantAccountIsActive == null; else loadCreateMerchantTitel">
+                <h1>Merchant Data</h1>
+            </ng-container>
+
+            <ng-template #loadCreateMerchantTitel>
+                <h1>Create Merchant Account</h1>
+            </ng-template>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="merchantAccountForm">
+
+        <!-- Container for single Inputs/Labels -->
+        <div class="merchant-card-items">
+            
+            <!-- Merchant Id + CountryCode (1row/4col) -->
+            <div class="row align-items-center pb-2">
+                <ng-container *ngIf="merchantAccountIsActive == null">
+                <div class="col-2">
+                    
+                    <label for="id">Merchant account iD</label>
+               
+                </div>
+
+                <div class="col-4">
+
+
+                        <input formControlName="id" type="text" class="form-control {{ isInvalid['id'] }}"
+                            [readonly]="true">
+                  
+
+                </div>
+            </ng-container>
+
+            </div>
+
+            <!-- Create new Row for Merchant Id Error Messages (1row,4col) -->
+            <div class="row">
+                <span class="col-2"></span>
+                <div class="col-4">
+                    <!-- ID Input Check! -->
+                    <ng-container *ngIf="merchantAccountForm.controls['id'] as id">
+                        <ng-container *ngIf="id.dirty || id.touched">
+                            <ng-container *ngIf="id.errors as errors">
+                                <p class="error-message-color" *ngIf="errors && id.dirty">
+                                    The specified ID is invalid!
+                                </p>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+            <!-- Payment Provider + SenderID (1row/4col) -->
+            <div class="row align-items-center pb-2">
+                <div class="col-2">
+                    <label for="paymentProvider">Payment provider</label>
+                </div>
+                <div class="col-4 ">
+                    <input formControlName="paymentProvider" type="text" class="form-control {{ isInvalid['paymentProvider'] }}"
+                    (ngModelChange)="inputChanged('paymentProvider')">
+                </div>
+
+                <div class="col-2">
+                    <label>Sender iD</label>
+                </div>
+                <div class="col-4">
+                    <input formControlName="senderId" type="text" class="form-control {{ isInvalid['senderId'] }}"
+                    (ngModelChange)="inputChanged('senderId')">
+                </div>
+            </div>
+
+            <!-- Create new Row for Company code Error Messages (1row,4col) -->
+            <div class="row">
+                <span class="col-2"></span>
+                <div class="col-4">
+                    <!-- ID Input Check! -->
+                    <ng-container *ngIf="merchantAccountForm.controls['companyCode'] as companyCode">
+                        <ng-container *ngIf="companyCode.dirty || companyCode.touched">
+                            <ng-container *ngIf="companyCode.errors as errors">
+                                <p class="error-message-color" *ngIf="errors && companyCode.dirty">
+                                    The specified company code is invalid!
+                                </p>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+
+            <!-- Country + Currency (1row,4col) -->
+            <div class="row align-items-center pb-2">
+                <div class="col-2">
+                    <label>Country</label>
+                </div>
+                <div class="col-4 ">
+                    <input type="text" formControlName="country"  class="form-control {{ isInvalid['country'] }}"
+                    (ngModelChange)="inputChanged('country')">
+                </div>
+                <div class="col-2">
+                    <label>Currency</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" formControlName="currency"  class="form-control {{ isInvalid['currency'] }}"
+                    (ngModelChange)="inputChanged('currency')">
+                </div>
+            </div>
+
+            <!--  LegalEntityName (1row/4col) -->
+            <div class="row align-items-center pb-4">
+
+                <div class="col-2">
+                    <label>Legal entity name</label>
+                </div>
+                <div class="col-4">
+                    <input formControlName="legalEntityName" type="text" class="form-control {{ isInvalid['legalEntityName'] }}"
+                    (ngModelChange)="inputChanged('legalEntityName')">
+                </div>
+
+                <div class="col-2">
+                    <label>Country code</label>
+                </div>
+                <div class="col-4">
+                    <input type="text" formControlName="countryCode"  class="form-control {{ isInvalid['countryCode'] }}"
+                    (ngModelChange)="inputChanged('countryCode')">
+                </div>
+                
+            </div>
+
+            <!-- Handle the Buttons -->
+            <div class="merchant-card-buttons">
+                <div class="row">
+                    <ng-container *ngIf="merchantAccountIsActive == null; else loadCreateMerchantCreateButton">
+                        <div class="col-6">
+                            <button type="button" (click)="createUpdateButton($event)" class="btn btn-success"
+                                [disabled]="!(merchantAccountForm.valid)">Update</button>
+                        </div>
+                    </ng-container>
+                    <ng-template #loadCreateMerchantCreateButton>
+                        <div class="col-12">
+                            <button type="button" (click)="createUpdateButton($event)" class="btn btn-success"
+                                [disabled]="!(merchantAccountForm.valid && (merchantAccountForm.dirty || merchantAccountForm.touched))">Create</button>
+                        </div>
+                    </ng-template>
+                    <div class="col-6 create-button" *ngIf="merchantAccountIsActive == null">
+                        <button type="button" (click)="deleteButton($event)" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+</div>
+</div>
+</form>
+
+</div>
