@@ -47,6 +47,8 @@ namespace APIs.Functions
       HttpResponseMessage response = new ();
       ResponseModel responseMessage = new ();
 
+      Task.Delay(10000).Wait();
+
       try
       {
         log.LogInformation("---------------------------------------------------------------------------------------------");
@@ -56,7 +58,7 @@ namespace APIs.Functions
         MerchantAccountModel merchantAccount = req.Content?.ReadAsAsync<MerchantAccountModel>().Result;
 
         log.LogInformation($"'{methodName}' - '{id}' - RequestBody: \n {JsonConvert.SerializeObject(merchantAccount)}");
-
+        Task.Delay(2000).Wait();
         // Fill the Id.
         merchantAccount.Id = id;
 
@@ -81,12 +83,14 @@ namespace APIs.Functions
 
           // Upload.
           Response containerResult = blobClient.UploadAsync(memoryStream, new BlobHttpHeaders { ContentType = "application/json" }).Result?.GetRawResponse();
-
+          Task.Delay(2000).Wait();
           log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful {containerResult?.ReasonPhrase} - '{containerResult?.Status}'");
         }
 
         log.LogInformation($"'{methodName}' - '{id}' - Blob was Successful Updated");
 
+
+        Task.Delay(2000).Wait();
         // Create ResponseMessage.
         response.StatusCode = HttpStatusCode.Accepted;
         responseMessage.Status = (int)HttpStatusCode.Accepted;

@@ -1,7 +1,7 @@
 .merchant-accounts-parent-container {
     box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
     border-radius: 0.3rem;
-
+    padding: 0.5rem;
     .merchants-titel{
         text-align: center;
         margin-top: 1.5rem;
@@ -9,7 +9,6 @@
     }
     
     table {
-
         vertical-align: middle;
         // --bs-table-striped-bg: #d9d9d9;
         
