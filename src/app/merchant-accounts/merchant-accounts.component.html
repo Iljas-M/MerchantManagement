@@ -10,7 +10,9 @@
           <tr>
             <th scope="col"><p>Nr</p></th>
             <th scope="col"><p>Merchant Id</p></th>
-            <th scope="col"><p></p></th>
+            <th scope="col"><p>Entity Name</p></th>
+            <th scope="col"><p>Sender Id</p></th>
+            <th scope="col"><p>Country</p></th>
             <th scope="col" class="text-end">
                 <button type="button" class="col btn btn-success" routerLink="account"><a>Create</a></button>
             </th>
@@ -20,7 +22,9 @@
           <tr *ngFor="let item of (merchantAccounts$ | async); let i = index">
             <th scope="row" class="normal-font"><p>{{ i + 1 }}</p></th>
             <td><p>{{ item.id }}</p></td>
-            <td><p>{{ "" }}</p></td>
+            <td><p>{{ item.legalEntityName }}</p></td>
+            <td><p>{{ item.senderId }}</p></td>
+            <td><p>{{ item.country }}</p></td>
             <td class="text-end">      
                 <button type="button" class="btn btn-primary" 
                 [routerLink]="['/merchants/', item.id]" (click)="editMerchant(item)"><a>Edit</a></button>        
